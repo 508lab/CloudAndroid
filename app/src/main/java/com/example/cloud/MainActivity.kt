@@ -1,5 +1,6 @@
 package com.example.cloud
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.cloud.fragment.HomeFragment
 import com.example.cloud.fragment.PersonalFragment
-import com.example.cloud.network.HttpClient
+import com.example.cloud.page.LoginActivity
+import com.example.cloud.util.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        startActivity(Intent(this, LoginActivity::class.java));
         initListener();
     }
 
@@ -42,9 +45,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.inTransaction {
             replaceFragment(HomeFragment())
         }
-        val hashMap = HashMap<String, String>();
-        hashMap.put("password", "123456");
-        HttpClient().httpGet("http://192.168.31.114:8000/login", hashMap);
+
     }
 
     private fun setBarBtn(btnc: Button, btn: Button) {

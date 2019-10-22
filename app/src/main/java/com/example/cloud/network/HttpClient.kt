@@ -8,7 +8,7 @@ import com.lzy.okgo.request.base.Request
 
 class HttpClient {
 
-    public fun httpGet(url: String, data: HashMap<String, String>) {
+    public fun httpPost(url: String, data: HashMap<String, String>, callback: ((String) -> Unit)) {
 
         OkGo.post<String>(url)
             .params(data)//123456
@@ -23,7 +23,7 @@ class HttpClient {
 
                 override fun onSuccess(response: Response<String>) {
                     val data = response.body();
-                    println(data.toString());
+                    callback(data.toString());
                 }
 
                 override fun onError(response: Response<String>) {
@@ -34,3 +34,4 @@ class HttpClient {
     }
 
 }
+

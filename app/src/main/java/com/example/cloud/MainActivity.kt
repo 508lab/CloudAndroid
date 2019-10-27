@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -12,18 +13,25 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.cloud.fragment.HomeFragment
 import com.example.cloud.fragment.PersonalFragment
 import com.example.cloud.page.LoginActivity
-import com.example.cloud.util.PreferencesUtil
+import com.example.cloud.util.Constant
+import com.example.cloud.util.SPUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
 
 class MainActivity : AppCompatActivity() {
-    private val fragmentList = ArrayList<androidx.fragment.app.Fragment>();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        startActivity(Intent(this, LoginActivity::class.java));
-        initListener();
+
+        val token = SPUtils.get(Constant.TOKEN, "") as String
+        if (TextUtils.isEmpty(token)) {
+            startActivity(Intent(this, LoginActivity::class.java))
+        } else {
+            initView();
+            initListener();
+        }
+
     }
 
     private fun initListener() {
@@ -62,4 +70,16 @@ class MainActivity : AppCompatActivity() {
     fun FragmentActivity.replaceFragment(fragment: Fragment) {
         supportFragmentManager.inTransaction { replace(R.id.framePage, fragment) }
     }
+
+    override fun onBackPressed() {
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment is HomeFragment) {
+                EventBus.getDefault().post("Back")
+                return
+            }
+        }
+        super.onBackPressed()
+    }
+
 }

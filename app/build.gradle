@@ -33,4 +33,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //没有使用特殊Header，可以不加这行
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    //RecyclerView需要导入的依赖
+    implementation 'com.android.support:design:29.0.0'
+
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    implementation 'org.jetbrains.anko:anko-common:0.9'
+
+    implementation 'com.kongzue.dialog_v3x:dialog:3.1.4'
+    implementation project(path: ':dkplayer-java')
+    implementation project(path: ':dkplayer-ui')
+
+
 }

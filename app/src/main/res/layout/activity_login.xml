@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:inputType="textUri|textPersonName"
             android:layout_marginTop="20dp"
-            android:text="http://192.168.31.132:8000"></EditText>
+            android:text="http://49.234.195.116:3000"></EditText>
     <EditText
             android:id="@+id/pwdText"
             android:layout_width="match_parent"

@@ -102,13 +102,9 @@ class HomeFragment : Fragment() {
     private fun initData() {
         rv_home.layoutManager = LinearLayoutManager(context)
         rv_home.adapter = homeAdapter
-
         rv_home_file.layoutManager = LinearLayoutManager(context)
         rv_home_file.adapter = homeFileAdapter
-
         requestFile(map, mData, homeAdapter, mFileData, homeFileAdapter)
-
-
     }
 
     private fun requestFile(
